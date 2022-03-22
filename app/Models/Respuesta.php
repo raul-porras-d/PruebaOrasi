@@ -11,13 +11,13 @@ class Respuesta extends Model
 
     use HasFactory;
 
-    public function egresado()
+    public function egresados()
     {
-        return $this->belongsTo('App\Models\Egresado', 'egresado_id');
+        return $this->belongsToMany('App\Models\Egresado', 'egresado_id');
     }
 
     public function pregunta()
     {
-        return $this->belongsTo('App\Models\Pregunta', 'pregunta_id');
+        return $this->belongsTo('App\Models\Pregunta');
     }
 }

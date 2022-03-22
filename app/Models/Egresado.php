@@ -15,7 +15,7 @@ class Egresado extends Model
     use HasFactory;
 
     public function respuestas(){
-        return $this->hasMany('App\Models\Respuesta', 'respuesta_id');
+        return $this->belongsToMany('App\Models\Respuesta');
     }
 
     public function domicilio(){

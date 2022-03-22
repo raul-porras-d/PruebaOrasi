@@ -15,7 +15,7 @@ class Pregunta extends Model
 
     public function respuestas()
     {
-        return $this->hasMany('App\Models\Respuesta', 'respuesta_id');
+        return $this->hasMany(Respuesta::class, 'pregunta_id');
     }
 
     public function categoria()
@@ -25,6 +25,6 @@ class Pregunta extends Model
 
     public function subpreguntas()
     {
-        return $this->hasMany('App\Models\Pregunta', 'parent_id');
+        return $this->hasMany(Pregunta::class, 'parent_id');
     }
 }
