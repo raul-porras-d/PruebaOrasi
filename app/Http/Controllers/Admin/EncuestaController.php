@@ -37,7 +37,8 @@ class EncuestaController extends Controller
      */
     public function store(Request $request)
     {
-        $arrayRespuestas = [1, 5, 8, 13];
+        $arrayRespuestas = [1, 3, 5, 9];
+
         $usuario = Egresado::find(1);
         //auth()->user()->respuestas()->attach($arrayRespuestas);
         $usuario->respuestas()->attach($arrayRespuestas);

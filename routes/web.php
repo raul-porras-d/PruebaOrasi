@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\Pregunta;
+use App\Models\Respuesta;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,7 +29,3 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::get('/prueba', 'App\Http\Controllers\Admin\EncuestaController@create');
 Route::post('/prueba', 'App\Http\Controllers\Admin\EncuestaController@store')->name('guardar');
 
-Route::get('/prueba-respuesta', function () {
-    $pregunta = Pregunta::find(2);
-    return $pregunta->respuestas;
-});
