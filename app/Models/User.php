@@ -59,5 +59,9 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+
+    public function egresado(){
+        return $this->hasOne('App\Models\Egresado');
+    }
  
 }

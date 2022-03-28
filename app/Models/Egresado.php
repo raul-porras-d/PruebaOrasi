@@ -15,7 +15,16 @@ class Egresado extends Model
     use HasFactory;
 
     public function respuestas(){
-        return $this->belongsToMany('App\Models\Respuesta');
+        return $this->belongsToMany('App\Models\Respuesta')->withTimestamps();
+    }
+
+  
+    public function organismo(){
+        return $this->belongsTo('App\Models\Organismo');
+    }
+
+    public function user(){
+        return $this->belongsTo('App\Models\User');
     }
 
     public function domicilio(){

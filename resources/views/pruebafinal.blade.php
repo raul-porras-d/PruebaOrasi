@@ -10,7 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>Prueba Encuesta</title>
 </head>
 
 <body>
@@ -26,7 +26,7 @@
                         {{ $pregunta->id }} - {{ $pregunta->pregunta }} <br>
 
                         @foreach ($pregunta->respuestas as $respuesta)
-                            <div class="form-check">
+                            <div class="form-check ms-3">
                                 <input class="form-check-input" type="radio" name="pregunta{{ $pregunta->id }}"
                                     id="flexRadioDefault{{ $respuesta->id }}" value="{{$respuesta->id}}">
                                 <label class="form-check-label" for="flexRadioDefault{{ $respuesta->id }}">
@@ -37,17 +37,19 @@
 
 
                         @foreach ($pregunta->subpreguntas as $subpregunta)
-                            &nbsp; *** - {{ $subpregunta->pregunta }} <br>
-                            @foreach ($pregunta->respuestas as $respuesta)
+                            &nbsp;  &nbsp; &nbsp; &nbsp;{{ $subpregunta->id }}- {{ $subpregunta->pregunta }} <br>
+                            <div class="ms-5">
+                                @foreach ($subpregunta->respuestas as $respuesta)
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio"
                                         name="pregunta{{ $respuesta->id }}"
                                         id="flexRadioDefault{{ $respuesta->id }}" value="{{$respuesta->id}}">
-                                    <label class="form-check-label" for="flexRadioDefault{{ $respuesta->id }}">
+                                        <label class="form-check-label" for="flexRadioDefault{{ $respuesta->id }}">
                                         {{ $respuesta->respuesta }}
                                     </label>
                                 </div>
                             @endforeach
+                            </div>
                         @endforeach
                     @endforeach
                     <button type="submit" class="btn btn-info" >Guardar</button>

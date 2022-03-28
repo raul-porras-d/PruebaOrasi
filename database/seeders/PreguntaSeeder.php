@@ -14,7 +14,7 @@ class PreguntaSeeder extends Seeder
      */
     public function run()
     {
-        /*    $nombresCat1 = [
+            $nombresCat1 = [
             'Calidad de los docentes:',
             'Plan de Estudios: ',
             'Oportunidad de participar en proyectos de investigación y desarrollo: ',
@@ -29,9 +29,16 @@ class PreguntaSeeder extends Seeder
             ]);
         }
 
-
+        Pregunta::create([
+            'pregunta' => 'Actividad a la que se dedica actualmente:',
+            'categoria_id' => 2,
+        ]);
+        Pregunta::create([
+            'pregunta' => 'Si estudia indicar si es: ',
+            'categoria_id' => 2,
+            'parent_id' => 7
+        ]);
         $nombresCat2 = [
-            'Actividad a la que se dedica actualmente:',
             'En caso de trabajar: Tiempo Transcurrido para obtener el primer empleo ',
             'Medio para Obtener el Empleo',
             'Requisitos de contratación',
@@ -42,17 +49,15 @@ class PreguntaSeeder extends Seeder
             'Nivel jerárquico en el trabajo ',
             'Condición de Trabajo',
             'Relación del trabajo con su área de formación: ',
-            'Datos de la empresa u organismo',
-            'Sector Económico de la Empresa u Organización ',
-            'Tamaño de la empresa u organización',
         ];
         for ($i = 0; $i < count($nombresCat2); $i++) {
             Pregunta::create([
-                'pregunta' => 'Actividad a la que se dedica actualmente:',
+                'pregunta' => $nombresCat2[$i],
                 'categoria_id' => 2
             ]);
         }
- */
+
+
 
         $nombresCat3 = [
             'Eficiencia para realizar las actividades laborales, en relación con su formación académica ',
@@ -77,7 +82,7 @@ class PreguntaSeeder extends Seeder
                 Pregunta::create([
                     'pregunta' => $nombresCat3[$i],
                     'categoria_id' => 3,
-                    'parent_id' => 4
+                    'parent_id' => 22
                 ]);
             } else {
                 Pregunta::create([
@@ -87,7 +92,7 @@ class PreguntaSeeder extends Seeder
             }
         }
 
-        /* 
+         
         $nombresCat4 = [
             'Le gustaría tomar cursos de actualización',
             'Le gustaría tomar algún Posgrado:',
@@ -110,6 +115,6 @@ class PreguntaSeeder extends Seeder
                 'pregunta' => $nombresCat5[$i],
                 'categoria_id' => 4
             ]);
-        } */
+        } 
     }
 }
