@@ -18,6 +18,6 @@ class Respuesta extends Model
 
     public function pregunta()
     {
-        return $this->belongsTo('App\Models\Pregunta');
+        return $this->belongsTo('App\Models\Pregunta', 'id');
     }
 }

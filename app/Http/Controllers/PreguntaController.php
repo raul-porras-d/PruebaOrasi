@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pregunta;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 
 class PreguntaController extends Controller
 {
@@ -15,7 +17,6 @@ class PreguntaController extends Controller
     {
         //
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -45,7 +46,7 @@ class PreguntaController extends Controller
      */
     public function show($id)
     {
-        //
+      
     }
 
     /**

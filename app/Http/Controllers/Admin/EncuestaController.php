@@ -3,12 +3,24 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Egresado;
-use App\Models\Pregunta;
+use App\Models\Encuesta;
+use App\Models\service\EncuestaService;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class EncuestaController extends Controller
 {
+    private EncuestaService $encuestaService;
+    function __construct(EncuestaService $encuestaService)
+    {
+        $this->encuestaService = $encuestaService;
+        $this->middleware(['auth:sanctum', 'verified']);
+
+        $this->middleware('encuesta.respondida', ['only' => [
+            'create',
+            'store',
+        ]]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -25,8 +37,8 @@ class EncuestaController extends Controller
      */
     public function create()
     {
-        $preguntas = Pregunta::where('parent_id', null)->get();
-        return view('pruebafinal', compact('preguntas'));
+        $categorias = $this->encuestaService->getCategoriesToEncuesta();
+        return view('egresados.encuestas.create', compact('categorias'));
     }
 
     /**
@@ -37,12 +49,10 @@ class EncuestaController extends Controller
      */
     public function store(Request $request)
     {
-        $arrayRespuestas = [1, 3, 5, 9];
+        $this->encuestaService->storeEncuesta($request);
+        Alert::success('Completado!', 'Has realizado tu encuesta con exito regresa el proximo año');
 
-        $usuario = Egresado::find(1);
-        //auth()->user()->respuestas()->attach($arrayRespuestas);
-        $usuario->respuestas()->attach($arrayRespuestas);
-        return $request;
+        return redirect(route('inicio'))->with('mensaje', 'Se ha realizado la encuesta satisfactoriamente');
     }
 
     /**
@@ -56,37 +66,16 @@ class EncuestaController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function mine()
     {
-        //
+        $encuestas = $this->encuestaService->getEncuestasByUserAuth();
+     
+        return view('egresados.encuestas.mine', compact('encuestas'));
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function showMine($year)
     {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $categorias = $this->encuestaService->getCategoriesToShow($year);
+        return view('egresados.encuestas.show-mine', compact('categorias'));
     }
 }
